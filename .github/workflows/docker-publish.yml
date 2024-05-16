@@ -1,4 +1,4 @@
-name: docker publish
+name: ci/cd
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -19,8 +19,8 @@ env:
 
 
 jobs:
-  build:
 
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -93,3 +93,21 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+  
+  deploy:
+    name: Deploy to kubernetes cluster
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
+    
+    steps:
+      - name: Set the kubernetes context
+        uses: azure/k8s-set-context@v4
+        with:
+          method: service-account
+          k8s-url: https://p.kaliki.eu:25032
+          k8s-secret: ${{ secrets.KUBERNETES_SECRET }}
