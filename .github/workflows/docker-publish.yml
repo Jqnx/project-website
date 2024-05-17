@@ -100,7 +100,6 @@ jobs:
     name: Deploy to kubernetes cluster
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/tags/v*'
 
     permissions:
       id-token: write
