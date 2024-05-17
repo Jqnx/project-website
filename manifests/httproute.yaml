@@ -1,0 +1,20 @@
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: nginx-httproute
+  namespace: nginx
+spec:
+  parentRefs:
+  - name: istio
+    namespace: gateway
+  hostnames: 
+  - "gtw.kaliki.eu"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: nginx-svc
+      port: 80
