@@ -132,4 +132,4 @@ jobs:
             manifests/service.yaml
             manifests/httproute.yaml
           images: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.tags }}
+            ${{ needs.build.outputs.tags }}
