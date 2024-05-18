@@ -9,7 +9,7 @@ spec:
   - name: istio
     namespace: gateway
   hostnames: 
-  - "gtw.kaliki.eu"
+  - "p.kaliki.eu"
   rules:
   - matches:
     - path:
