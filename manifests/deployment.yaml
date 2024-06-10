@@ -4,7 +4,7 @@ metadata:
   name: nginx
   namespace: nginx
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: nginx
@@ -19,3 +19,4 @@ spec:
         ports:
         - name: http
           containerPort: 80
+
